@@ -4,6 +4,7 @@
     padding: 5px;
     padding-left: 10px;
     min-width: 300px;
+    user-select: none;
 }
 
 h1 {
@@ -13,6 +14,7 @@ h1 {
 .main {
     margin: 20px;
     min-width: 300px;
+    min-height: 666px;
     box-shadow: 0  2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px; 
     
@@ -22,7 +24,7 @@ h1 {
     align-items: start;
 
     
-
+    user-select: none;
 }
 
 .options {
@@ -31,14 +33,19 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    /* border-right: 1px solid black; */
 }
 
 .options > *{
     min-width: 100px;
     padding: 15px;
     margin-bottom: 8px;
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
 
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
 }
 
 .content {
@@ -53,10 +60,93 @@ h1 {
     margin: 0;
 }
 
-td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid black;
-    margin-bottom: -1px;
+table {
     border-collapse: collapse;
+    width: 100%;
+}
+
+th{
+    text-align: center;
+}
+
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button {
+    width: 80px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: rgb(8, 231, 0);
+    border: none;
+    cursor: pointer;
+
+    border-radius: 5px;
+}
+
+.add-btn, .clear-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 60, 0, 0.08);
+
+    border-radius: 9px;
+
+    user-select: none;
+}
+
+/* .clear-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 60, 0, 0.08);
+
+    border-radius: 9px;
+} */
+/* 点击按钮效果 */
+.add-btn:active {
+    background-color: rgb(0, 200, 0);
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 6px 12px rgba(39, 174, 96, 0.25);
+    transition: all 0.1s ease;
+}
+
+.clear-btn:active {
+    background-color: rgb(231, 8, 0);
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 6px 12px rgba(39, 174, 96, 0.25);
+    transition: all 0.1s ease;
+}
+
+
+/* 悬停按钮效果 */
+.add-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(46, 204, 113, 0.2);
+    /* background-color: rgb(0, 255, 0); */
+}
+.add-btn:hover::before{
+    height: 8px;
+    background: linear-gradient(90deg,#27ae60,#219653);
+}
+
+.clear-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
 }

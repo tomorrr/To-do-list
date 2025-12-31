@@ -13,42 +13,36 @@
     </div>
     <div class="main">
         <div class="options">
-            <div class="add-btn">Add</div>
-            <div class="clear-btn">Clear All</div>
-            <div class="add-btn">Add</div>
-            <div class="add-btn">Add</div>
-            <div class="clear-btn">Clear All</div>
-            <div class="add-btn">Add</div>
-            <div class="add-btn">Add</div>
-            <div class="clear-btn">Clear All</div>
-            <div class="clear-btn">Clear All</div>
+            <div class="add-btn" onclick="addTask()">Add</div>
+            <div class="clear-btn" onclick="clearTasks()">Clear All</div>
+            <!-- 待拓展功能 -->
         </div>
         <div class="content">
-            <table class="list">
+            <table id="table">
             <tr>
-                <td style="min-width: 200px;">任务</td>
-                <td style="min-width: 200px;">状态</td>
-                <td style="min-width: 200px;">操作</td>
+                <th style="min-width: 200px;">任务</th>
+                <th style="min-width: 200px;">状态</th>
+                <th style="min-width: 200px;">操作</th>
             </tr>
             <tr>
                 <td>任务一</td>
                 <td>未完成</td>
-                <td><button class="done-btn">完成</button> <button class="delete-btn">删除</button></td>
+                <td><button class="done-btn" onclick='markComplete(this)'>完成</button> <button class="delete-btn" onclick='deleteTask(this)'>删除</button></td>
             </tr>
             <tr>
                 <td>任务2</td>
                 <td>未完成</td>
-                <td><button class="done-btn">完成</button> <button class="delete-btn">删除</button></td>
+                <td><button class="done-btn" onclick='markComplete(this)'>完成</button> <button class="delete-btn" onclick='deleteTask(this)'>删除</button></td>
             </tr>
             <tr>
                 <td>任务3</td>
                 <td>未完成</td>
-                <td><button class="done-btn">完成</button> <button class="delete-btn">删除</button></td>
+                <td><button class="done-btn" onclick='markComplete(this)'>完成</button> <button class="delete-btn" onclick='deleteTask(this)'>删除</button></td>
             </tr>
             <tr>
                 <td>任务4</td>
                 <td>未完成</td>
-                <td><button class="done-btn">完成</button> <button class="delete-btn">删除</button></td>
+                <td><button class="done-btn" onclick='markComplete(this)'>完成</button> <button class="delete-btn" onclick='deleteTask(this)'>删除</button></td>
             </tr>
             </table>
         </div>
