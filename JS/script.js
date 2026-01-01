@@ -54,3 +54,37 @@ function clearTasks() {
     }
     console.log("所有任务已清除");
 }
+
+// 数据的本地保存
+function saveTasks() {
+    var table = document.getElementById("table");
+    var tasks = [];
+    // 遍历表格的每一行，跳过表头
+    for (var i = 1; i < table.rows.length; i++) {
+        var row = table.rows[i];
+        var task = {
+            name: row.cells[0].innerText,
+            status: row.cells[1].innerText
+        };
+        tasks.push(task);
+    }
+    // 将任务数组保存到本地存储
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log("任务已保存到本地存储");
+}
+
+// 页面加载时从本地存储加载任务
+window.onload = function() {
+    var tasks = JSON.parse(localStorage.getItem("tasks"));
+    if (tasks) {
+        for (var i = 0; i < tasks.length; i++) {
+            var task = tasks[i];
+            addTask();
+            var table = document.getElementById("table");
+            var row = table.rows[table.rows.length - 1];
+            row.cells[0].innerText = task.name;
+            row.cells[1].innerText = task.status;
+            console.log("任务已从本地存储加载");
+        }
+    }
+}
