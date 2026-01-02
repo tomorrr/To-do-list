@@ -150,3 +150,55 @@ button {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
 }
+
+/* 模态框样式 */
+.inputInfo {
+    display: none;
+    width: 400px;
+    height: 200px;
+    position: fixed;
+    justify-content: start;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.inputTitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 28px;
+}
+
+.inputBtn {
+    display: flex;
+    justify-content: space-between;
+}
+.confirmBtn, .cancelBtn {
+    width: 45%;
+    padding: 10px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    /* border: black 2px solid;    */
+}

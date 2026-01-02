@@ -1,33 +1,6 @@
 console.log("JS is ready");
 
-function addTask() {
-    // 获取表格元素
-    var table = document.getElementById("table");
-    // 检查表格是否存在
-    if (!table) {
-    console.error('Table element not found! Check your HTML structure.');
-    return;
-    }
-    // 获取表格的当前行数
-    var length = document.getElementsByTagName("tr").length;
-    console.log(length);
 
-
-    // 在表格末尾插入新行
-    var newRow = table.insertRow(length);
-    console.log(newRow);
-    // 在新行中插入单元格
-    var cell1 = newRow.insertCell(0);
-    var cell2 = newRow.insertCell(1);
-    var cell3 = newRow.insertCell(2);
-    // 向单元格中添加内容
-    cell1.innerHTML = "新任务";
-    cell2.innerHTML = "未完成";
-    cell3.innerHTML = "<button onclick='markComplete(this)'>完成</button> <button onclick='deleteTask(this)'>删除</button>";
-
-    // 本地保存任务
-    saveTasks();
-}
 
 // 标记任务为完成 修改任务状态
 function markComplete(btn) {
@@ -37,6 +10,7 @@ function markComplete(btn) {
     if(row.cells[1].innerHTML === "已完成"){
         row.cells[1].innerHTML = "未完成";
         // alert("修改成功！");
+        saveTasks();
         return;
     }
 
@@ -94,7 +68,9 @@ function saveTasks() {
         var task = {
             name: row.cells[0].innerText,
             status: row.cells[1].innerText
+
         };
+        console.log(task);
         tasks.push(task);
     }
     // 将任务数组保存到本地存储
@@ -102,18 +78,99 @@ function saveTasks() {
     console.log("任务已保存到本地存储");
 }
 
+
+
+function confirmAdd() {
+    var input = document.getElementById("taskInput");
+    var taskName = input.value.trim();
+    if (taskName === "") {
+        alert("任务内容不能为空！");
+        return;
+    }
+
+    var length = document.getElementsByTagName("tr").length;
+    console.log(length);
+
+    // 获取表格元素
+    var table = document.getElementById("table");
+    // 在表格末尾插入新行
+    var newRow = table.insertRow(length);
+    // 在新行中插入单元格
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+    // 向单元格中添加内容
+    cell1.innerHTML = taskName;
+    cell2.innerHTML = "未完成";
+    cell3.innerHTML = "<button onclick='markComplete(this)'>完成</button> <button onclick='deleteTask(this)'>删除</button>";
+    // 清空输入框
+    input.value = "";
+    // 本地保存任务
+    saveTasks();
+    
+    // 关闭输入任务信息的界面
+    document.querySelector(".inputInfo").style.display = "none";
+}
+
+function cancelAdd() {
+    var input = document.getElementById("taskInput");
+    // 清空输入框
+    input.value = "";
+    // 关闭输入任务信息的界面
+    document.querySelector(".inputInfo").style.display = "none";
+}
+
+function addTask() {
+    // 获取表格元素
+    var table = document.getElementById("table");
+    // 检查表格是否存在
+    if (!table) {
+    console.error('Table element not found! Check your HTML structure.');
+    return;
+    }
+    // 显示输入任务信息的界面
+    document.querySelector(".inputInfo").style.display = "block";
+    // // 获取表格的当前行数
+    // var length = document.getElementsByTagName("tr").length;
+    // console.log(length);
+
+
+    // // 在表格末尾插入新行
+    // var newRow = table.insertRow(length);
+    // console.log(newRow);
+    // // 在新行中插入单元格
+    // var cell1 = newRow.insertCell(0);
+    // var cell2 = newRow.insertCell(1);
+    // var cell3 = newRow.insertCell(2);
+    // // 向单元格中添加内容
+    // cell1.innerHTML = "新任务";
+    // cell2.innerHTML = "未完成";
+    // cell3.innerHTML = "<button onclick='markComplete(this)'>完成</button> <button onclick='deleteTask(this)'>删除</button>";
+
+    // 本地保存任务
+    // saveTasks();
+
+}
+
 // 页面加载时从本地存储加载任务
 window.onload = function() {
-    var tasks = JSON.parse(localStorage.getItem("tasks"));
-    if (tasks) {
-        for (var i = 0; i < tasks.length; i++) {
-            var task = tasks[i];
-            addTask();
-            var table = document.getElementById("table");
-            var row = table.rows[table.rows.length - 1];
-            row.cells[0].innerText = task.name;
-            row.cells[1].innerText = task.status;
-            console.log("任务已从本地存储加载");
-        }
+    var table = document.getElementById("table");
+    // 检查表格是否存在
+    if (!table) {
+    console.error('Table element not found! Check your HTML structure.');
+    return;
     }
-}
+    // 从本地存储获取任务数据
+    var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    for (var i = 0; i < tasks.length; i++) {
+        var task = tasks[i];
+        var newRow = table.insertRow(-1);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        cell1.innerHTML = task.name;
+        cell2.innerHTML = task.status;
+        cell3.innerHTML = "<button onclick='markComplete(this)'>完成</button> <button onclick='deleteTask(this)'>删除</button>";
+    }
+    console.log("任务已从本地存储加载");
+};
