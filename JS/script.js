@@ -24,15 +24,38 @@ function addTask() {
     cell1.innerHTML = "新任务";
     cell2.innerHTML = "未完成";
     cell3.innerHTML = "<button onclick='markComplete(this)'>完成</button> <button onclick='deleteTask(this)'>删除</button>";
+
+    // 本地保存任务
+    saveTasks();
 }
 
-// 标记任务为完成
+// 标记任务为完成 修改任务状态
 function markComplete(btn) {
     // 获取按钮所在的行
     var row = btn.parentNode.parentNode;
     // 修改状态单元格的内容
+    if(row.cells[1].innerHTML === "已完成"){
+        row.cells[1].innerHTML = "未完成";
+        // alert("修改成功！");
+        return;
+    }
+
     row.cells[1].innerHTML = "已完成";
+
+    // 本地保存任务
+    saveTasks();
 }
+
+// // 标记任务为未完成
+// function markIncomplete(btn) {
+//     // 获取按钮所在的行
+//     var row = btn.parentNode.parentNode;
+//     // 修改状态单元格的内容
+//     row.cells[1].innerHTML = "未完成";
+
+//     // 本地保存任务
+//     saveTasks();
+// }
 
 
 
@@ -43,6 +66,9 @@ function deleteTask(btn) {
     var row = btn.parentNode.parentNode;
     // 删除该行
     row.parentNode.removeChild(row);
+
+    // 本地保存任务
+    saveTasks();
 }
 
 // 清除所有任务
@@ -53,6 +79,9 @@ function clearTasks() {
         table.deleteRow(1);
     }
     console.log("所有任务已清除");
+
+    // 本地保存任务
+    saveTasks();
 }
 
 // 数据的本地保存
